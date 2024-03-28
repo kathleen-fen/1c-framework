@@ -7,10 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TreeView from "components/TreeView";
 import { treeData } from "components/TreeView/mockTreeData";
 
-import { makeServer } from "./server";
+//import { makeServer } from "./server";
+import { startMirage } from "./mirage/config";
 
 if (process.env.NODE_ENV === "development") {
-  makeServer({ environment: "development" });
+  startMirage({ environment: "development" });
 }
 export default function App() {
   useEffect(() => {
