@@ -11,6 +11,37 @@ export function startMirage({ environment = "test" } = {}) {
     factories,
     seeds(server) {
       server.createList("user", faker.number.int({ min: 2, max: 25 }));
+
+      server.create("dictionaryItem", { label: "Hello" });
+      const parent = server.create("dictionaryItem", {
+        label: faker.commerce.productName(),
+      });
+      server.create("dictionaryItem", {
+        label: faker.commerce.productName(),
+        parentId: parent.id,
+      });
+      const parent_1 = server.create("dictionaryItem", {
+        label: faker.commerce.productName(),
+        parentId: parent.id,
+      });
+      server.create("dictionaryItem", {
+        label: faker.commerce.productName(),
+        parentId: parent.id,
+      });
+      server.create("dictionaryItem", {
+        label: faker.commerce.productName(),
+        parentId: parent_1.id,
+      });
+      server.create("dictionaryItem", {
+        label: faker.commerce.productName(),
+        parentId: parent_1.id,
+      });
+      server.create("dictionaryItem", {
+        label: faker.commerce.productName(),
+        parentId: parent_1.id,
+      });
+      server.create("dictionaryItem", { label: faker.commerce.productName() });
+      server.create("dictionaryItem", { label: faker.commerce.productName() });
     },
     environment,
   });
