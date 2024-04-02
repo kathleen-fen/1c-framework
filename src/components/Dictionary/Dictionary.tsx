@@ -1,6 +1,5 @@
-import { tr } from "@faker-js/faker";
 import { Grid, Box } from "@mui/material";
-import { RichTreeView, SimpleTreeView } from "@mui/x-tree-view";
+import { RichTreeView } from "@mui/x-tree-view";
 import { TreeItem } from "@mui/x-tree-view";
 import { TreeViewBaseItem } from "@mui/x-tree-view/models";
 import { useEffect, useState } from "react";

@@ -11,6 +11,10 @@ import { Container } from "@mui/material";
 //import { makeServer } from "./server";
 import { startMirage } from "./mirage/config";
 import { Dictionary } from "./components/Dictionary/Dictionary";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 if (process.env.NODE_ENV === "development") {
   startMirage({ environment: "development" });
@@ -22,7 +26,7 @@ export default function App() {
     fetch(url).then((res) => console.log(res));
   }, []); */
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <Container>
         <Dictionary />
@@ -34,6 +38,7 @@ export default function App() {
       <FontAwesomeIcon icon="check-square" />
       Your <FontAwesomeIcon icon="coffee" /> is hot and ready!
       <TreeView data={treeData} /> */}
-    </>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
