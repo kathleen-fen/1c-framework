@@ -1,6 +1,7 @@
 import { Server } from "miragejs";
 import { AppSchema } from "../types";
 import { DictionaryItem } from "@/types";
+import { map } from "lodash";
 
 function buildTree(
   items: DictionaryItem[],
@@ -23,7 +24,7 @@ export function routesForDictionary(server: Server) {
     console.log("children: ", children);
     return children.models
       .map((model) => model.attrs)
-      .sort((a, b) => a.order - b.order);
+      .sort((a, b) => a.order - b.order || +a.id - +b.id);
   });
 
   server.get(`/dictionaryFolders`, (schema: AppSchema, request) => {
@@ -36,5 +37,15 @@ export function routesForDictionary(server: Server) {
     console.log("tree: ", tree);
 
     return tree;
+  });
+
+  server.put(`/dictionaryItems/updateOrder`, (schema: AppSchema, request) => {
+    const items = JSON.parse(request.requestBody);
+    items.forEach((item: DictionaryItem) => {
+      schema.find("dictionaryItem", item.id)?.update(item);
+    });
+    return schema
+      .find("dictionaryItem", map(items, "id"))
+      .models.map((model) => model.attrs);
   });
 }
