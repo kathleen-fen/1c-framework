@@ -1,7 +1,8 @@
 import { Grid, Box } from "@mui/material";
-import { RichTreeView } from "@mui/x-tree-view";
-import { useQuery } from "@tanstack/react-query";
-import { DictionaryItem } from "@/types";
+
+import { DictionaryTree } from "./DictionaryTree/DictionaryTree";
+import { DictionaryFolder } from "./DictionaryFolder/DictionaryFolder";
+import { useState } from "react";
 
 /* type DictionaryItem = {
   id: string;
@@ -19,18 +20,10 @@ import { DictionaryItem } from "@/types";
   return data;
 }; */
 
-const getDictionaryFolders = async (): Promise<DictionaryItem[]> => {
-  const url = `/dictionaryFolders`;
-  const data = (await fetch(url)).json();
-  return data;
-};
-
 export const Dictionary = () => {
-  const { isPending, isError, data, error } = useQuery({
-    queryKey: ["dictionaryFolders"],
-    queryFn: getDictionaryFolders,
-  });
-
+  const [activeParentId, setActiveParentId] = useState<string | undefined>(
+    undefined
+  );
   /*   useQuery({
     queryKey: ["dictionaryItems", parentId],
     queryFn: async () => {
@@ -43,22 +36,12 @@ export const Dictionary = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={2}>
-        <Box sx={{ border: "1px dashed grey" }}>
-          {isPending && <div>Loading...</div>}
-          {data && (
-            <RichTreeView
-              items={data}
-              /*   onItemExpansionToggle={(event, itemId, isExpanded) => {
-              console.log({ event, itemId, isExpanded });
-              setParentId(itemId);
-            }} */
-            />
-          )}
-          {isError && <div>{error}</div>}
-        </Box>
+        <DictionaryTree changeParentId={(id) => setActiveParentId(id)} />
       </Grid>
       <Grid item xs={10}>
-        <Box sx={{ border: "1px dashed grey" }}>xs=10</Box>
+        <Box sx={{ border: "1px dashed grey" }}>
+          <DictionaryFolder parentId={activeParentId} />
+        </Box>
       </Grid>
     </Grid>
   );
