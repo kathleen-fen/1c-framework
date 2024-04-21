@@ -21,7 +21,9 @@ export function routesForDictionary(server: Server) {
       parentId,
     });
     console.log("children: ", children);
-    return children.models.map((model) => model.attrs);
+    return children.models
+      .map((model) => model.attrs)
+      .sort((a, b) => a.order - b.order);
   });
 
   server.get(`/dictionaryFolders`, (schema: AppSchema, request) => {

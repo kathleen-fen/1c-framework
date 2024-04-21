@@ -10,4 +10,5 @@ export type DictionaryItem = {
   parentId?: string;
   isFolder?: boolean;
   children?: DictionaryItem[];
+  order: number;
 };

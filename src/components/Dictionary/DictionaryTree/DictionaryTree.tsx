@@ -59,6 +59,7 @@ export const DictionaryTree = ({ changeParentId }: DictionaryTreeProps) => {
           slots={{
             collapseIcon: FolderOpenIcon,
             expandIcon: FolderIcon,
+            endIcon: FolderIcon,
           }}
 
           /*   onItemExpansionToggle={(event, itemId, isExpanded) => {

@@ -12,48 +12,57 @@ export function startMirage({ environment = "test" } = {}) {
     seeds(server) {
       server.createList("user", faker.number.int({ min: 2, max: 25 }));
 
-      server.create("dictionaryItem", { label: "Hello" });
+      server.create("dictionaryItem", { label: "Hello", order: 1 });
       const parent = server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         isFolder: true,
+        order: 2,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent.id,
         isFolder: true,
+        order: 1,
       });
       const parent_1 = server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent.id,
         isFolder: true,
+        order: 2,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent.id,
         isFolder: true,
+        order: 3,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent_1.id,
         isFolder: true,
+        order: 1,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent_1.id,
         isFolder: true,
+        order: 2,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent_1.id,
         isFolder: true,
+        ordder: 3,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         isFolder: true,
+        order: 3,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         isFolder: true,
+        order: 4,
       });
     },
     environment,
