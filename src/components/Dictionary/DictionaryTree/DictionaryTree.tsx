@@ -2,6 +2,9 @@ import { Box } from "@mui/material";
 import { RichTreeView } from "@mui/x-tree-view";
 import { useQuery } from "@tanstack/react-query";
 import { DictionaryItem } from "@/types";
+import FolderIcon from "@mui/icons-material/Folder";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
+import exp from "constants";
 
 /* type DictionaryItem = {
   id: string;
@@ -53,6 +56,11 @@ export const DictionaryTree = ({ changeParentId }: DictionaryTreeProps) => {
             console.log({ event, item });
             changeParentId(item);
           }}
+          slots={{
+            collapseIcon: FolderOpenIcon,
+            expandIcon: FolderIcon,
+          }}
+
           /*   onItemExpansionToggle={(event, itemId, isExpanded) => {
               console.log({ event, itemId, isExpanded });
               setParentId(itemId);

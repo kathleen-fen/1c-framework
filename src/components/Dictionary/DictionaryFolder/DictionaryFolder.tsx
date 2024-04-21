@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { DictionaryItem } from "@/types";
+import { Box } from "@mui/material";
 
 const getDictionaryItems = async (
   parentId?: string
@@ -21,7 +22,11 @@ export const DictionaryFolder = ({ parentId }: DictionaryFolderProps) => {
   return (
     <>
       {isPending && <div>Loading...</div>}
-      <div>DictionaryFolder component for {parentId} parentId</div>
+      <Box>
+        {data?.map((item) => (
+          <div key={item.id}>{item.label}</div>
+        ))}
+      </Box>
     </>
   );
 };
