@@ -15,33 +15,46 @@ export function startMirage({ environment = "test" } = {}) {
       server.create("dictionaryItem", { label: "Hello" });
       const parent = server.create("dictionaryItem", {
         label: faker.commerce.productName(),
+        isFolder: true,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent.id,
+        isFolder: true,
       });
       const parent_1 = server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent.id,
+        isFolder: true,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent.id,
+        isFolder: true,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent_1.id,
+        isFolder: true,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent_1.id,
+        isFolder: true,
       });
       server.create("dictionaryItem", {
         label: faker.commerce.productName(),
         parentId: parent_1.id,
+        isFolder: true,
       });
-      server.create("dictionaryItem", { label: faker.commerce.productName() });
-      server.create("dictionaryItem", { label: faker.commerce.productName() });
+      server.create("dictionaryItem", {
+        label: faker.commerce.productName(),
+        isFolder: true,
+      });
+      server.create("dictionaryItem", {
+        label: faker.commerce.productName(),
+        isFolder: true,
+      });
     },
     environment,
   });

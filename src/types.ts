@@ -5,7 +5,9 @@ export type User = {
 };
 
 export type DictionaryItem = {
+  id: string;
   label: string;
   parentId?: string;
+  isFolder?: boolean;
   children?: DictionaryItem[];
 };

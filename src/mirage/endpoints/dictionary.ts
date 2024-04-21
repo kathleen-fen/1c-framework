@@ -1,5 +1,18 @@
 import { Server } from "miragejs";
 import { AppSchema } from "../types";
+import { DictionaryItem } from "@/types";
+
+function buildTree(
+  items: DictionaryItem[],
+  parentId?: string
+): DictionaryItem[] {
+  return items
+    .filter((item) => item.parentId === parentId)
+    .map((item) => ({
+      ...item,
+      children: buildTree(items, item.id),
+    }));
+}
 
 export function routesForDictionary(server: Server) {
   server.get(`/dictionaryItems`, (schema: AppSchema, request) => {
@@ -40,5 +53,17 @@ export function routesForDictionary(server: Server) {
       }
     }); */
     return firstLevelDictionaryItems;
+  });
+
+  server.get(`/dictionaryFolders`, (schema: AppSchema, request) => {
+    const dictionaryFolders = schema.where("dictionaryItem", {
+      isFolder: true,
+    });
+    const tree = buildTree(
+      dictionaryFolders.models.map((model) => model.attrs)
+    );
+    console.log("tree: ", tree);
+
+    return tree;
   });
 }
