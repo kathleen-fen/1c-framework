@@ -1,3 +1,4 @@
 const namespaceRegex = /^(?=.{6,50}$)[a-zA-Z0-9-]*[a-zA-Z]\.servicebus\.windows\.net$/; 
 const partitionRegex = /^[1-9][0-9]*$/;
 const eventHubNameRegex = /^(?=.{1,256}$)[a-zA-Z0-9][a-zA-Z0-9\.\-_]*[a-zA-Z0-9]$/;
+const consumerGroupRegex = /^(\$Default|(?=.{1,50}$)[a-zA-Z0-9][a-zA-Z0-9\-_]*[a-zA-Z0-9])$/;
